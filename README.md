@@ -42,7 +42,7 @@ uvicorn src.api.app:app --reload --port 8001
 
 ## Documentation API
 
-Une fois lancée : http://localhost:8000/docs
+Une fois lancée : http://localhost:8001/docs
 
 ## Structure
 
