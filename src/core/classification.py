@@ -17,36 +17,56 @@ def classify_deforestation(area_t0: dict, area_t1: dict, loss_percentage: float)
             "La scène contient très peu de végétation sur les deux dates, ce qui limite "
             "l'interprétation d'une dynamique forestière."
         )
-    elif loss_percentage < -10:
+    elif pct_t0 < 1.0 and pct_t1 >= 10.0:
+        label = "reboisement_marque"
+        title = "Reboisement marqué"
+        severity = "positive"
+        summary = "La végétation apparaît nettement entre t0 et t1 sur une part importante de la scène."
+    elif pct_t0 < 1.0 and pct_t1 >= 1.0:
+        label = "reboisement_leger"
+        title = "Reboisement léger"
+        severity = "positive"
+        summary = "La végétation augmente à partir d'un niveau initial très faible."
+    elif pct_t1 < 1.0 and pct_t0 >= 10.0:
+        label = "deforestation_severe"
+        title = "Déforestation sévère"
+        severity = "elevee"
+        summary = "La végétation présente à t0 disparaît presque totalement à t1."
+    elif pct_t1 < 1.0 and pct_t0 >= 1.0:
+        label = "deforestation_moderee"
+        title = "Déforestation modérée"
+        severity = "moderee"
+        summary = "La couverture végétale chute vers un niveau résiduel à t1."
+    elif delta_points >= 10 or loss_percentage < -10:
         label = "reboisement_marque"
         title = "Reboisement marqué"
         severity = "positive"
         summary = "La couverture végétale progresse nettement entre t0 et t1."
-    elif loss_percentage < -2:
+    elif delta_points >= 2 or loss_percentage < -2:
         label = "reboisement_leger"
         title = "Reboisement léger"
         severity = "positive"
         summary = "La couverture végétale augmente légèrement entre t0 et t1."
-    elif loss_percentage <= 2 and delta_abs <= 2:
+    elif delta_abs <= 2 and abs(loss_percentage) <= 2:
         label = "stable"
         title = "Situation stable"
         severity = "faible"
         summary = "La couverture végétale reste globalement stable entre les deux dates."
-    elif loss_percentage <= 10:
-        label = "deforestation_legere"
-        title = "Déforestation légère"
-        severity = "moderee"
-        summary = "On observe un recul limité mais réel de la végétation."
-    elif loss_percentage <= 25:
+    elif loss_percentage > 25 or delta_points <= -20:
+        label = "deforestation_severe"
+        title = "Déforestation sévère"
+        severity = "elevee"
+        summary = "La perte de couverture végétale est forte sur la zone étudiée."
+    elif loss_percentage > 10 or delta_points <= -8:
         label = "deforestation_moderee"
         title = "Déforestation modérée"
         severity = "moderee"
         summary = "La perte de couverture végétale est nette et mérite une attention particulière."
     else:
-        label = "deforestation_severe"
-        title = "Déforestation sévère"
-        severity = "elevee"
-        summary = "La perte de couverture végétale est forte sur la zone étudiée."
+        label = "deforestation_legere"
+        title = "Déforestation légère"
+        severity = "moderee"
+        summary = "On observe un recul limité mais réel de la végétation."
 
     confidence = 0.55 + min(abs(loss_percentage) / 40.0, 0.25) + min(delta_abs / 20.0, 0.15)
     if pct_t0 < 5 or pct_t1 < 5:

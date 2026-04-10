@@ -29,13 +29,15 @@ Important :
 ## Installation
 
 ```bash
+python3.12 -m .venv venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
 ## Lancement de l'API
 
 ```bash
-uvicorn src.api.app:app --reload
+uvicorn src.api.app:app --reload --port 8001
 ```
 
 ## Documentation API
