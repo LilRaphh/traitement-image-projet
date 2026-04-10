@@ -19,6 +19,7 @@ async def compare_images(
     - surface végétalisée t0 (pixels + %)
     - surface végétalisée t1 (pixels + %)
     - perte relative (%)
+    - classification métier de l'évolution
     - interprétation textuelle
     """
     img_t0 = await upload_to_numpy(image_t0)
@@ -31,5 +32,6 @@ async def compare_images(
         "area_t0": result["area_t0"],
         "area_t1": result["area_t1"],
         "loss_percentage": result["loss_percentage"],
+        "classification": result["classification"],
         "interpretation": result["interpretation"],
     })

@@ -69,6 +69,7 @@ async def run_pipeline(
             "area_t0": result["area_t0"],
             "area_t1": result["area_t1"],
             "loss_percentage": result["loss_percentage"],
+            "classification": result["classification"],
             "interpretation": result["interpretation"],
         },
     })

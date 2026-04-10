@@ -17,7 +17,8 @@ L'approche suivie est volontairement lisible :
 2. on améliore légèrement leur lisibilité quand la lumière ou le bruit gênent l'analyse ;
 3. on repère automatiquement les zones qui ressemblent le plus à de la végétation ;
 4. on compare ensuite la surface végétalisée entre les deux dates ;
-5. on produit enfin une carte et un pourcentage de perte.
+5. on classe enfin l'évolution observée ;
+6. on produit enfin une carte et un pourcentage de perte.
 
 Important :
 
@@ -62,5 +63,5 @@ notebooks/    → démonstration
 | POST | /analyze | Histogrammes + stats initiales |
 | POST | /preprocess | Prétraitement de l'image |
 | POST | /segment | Segmentation K-means + masque végétation |
-| POST | /compare | Comparaison t0/t1 + quantification |
-| POST | /pipeline | Pipeline complet (t0 + t1) |
+| POST | /compare | Comparaison t0/t1 + quantification + classification |
+| POST | /pipeline | Pipeline complet (t0 + t1) avec classification finale |

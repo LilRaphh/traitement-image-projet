@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import ndimage
+from src.core.classification import classify_deforestation
 from src.core.segmentation import segment
 from src.core.quantification import quantify
 from src.utils.visualization import plot_deforestation_map
@@ -79,10 +80,17 @@ def compare_masks(mask_t0: np.ndarray, mask_t1: np.ndarray) -> dict:
 
     interpretation = " ".join(interpretation_parts)
 
+    classification = classify_deforestation(
+        area_t0=quant["area_t0"],
+        area_t1=quant["area_t1"],
+        loss_percentage=loss,
+    )
+
     return {
         "map": deforestation_map,
         "area_t0": quant["area_t0"],
         "area_t1": quant["area_t1"],
         "loss_percentage": loss,
         "interpretation": interpretation,
+        "classification": classification,
     }
