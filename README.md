@@ -2,6 +2,29 @@
 
 Pipeline de détection de déforestation par analyse d'images satellites.
 
+## Lecture Métier
+
+Le projet compare deux images d'une même zone prises à deux dates différentes :
+
+- `t0` : image la plus ancienne
+- `t1` : image la plus récente
+
+L'objectif est d'aider à répondre à une question simple : **la couverture végétale a-t-elle reculé entre t0 et t1 ?**
+
+L'approche suivie est volontairement lisible :
+
+1. on vérifie d'abord si les deux images sont comparables visuellement ;
+2. on améliore légèrement leur lisibilité quand la lumière ou le bruit gênent l'analyse ;
+3. on repère automatiquement les zones qui ressemblent le plus à de la végétation ;
+4. on compare ensuite la surface végétalisée entre les deux dates ;
+5. on produit enfin une carte et un pourcentage de perte.
+
+Important :
+
+- le résultat aide à orienter l'interprétation, mais ne remplace pas une expertise terrain ;
+- des différences de saison, d'éclairage, d'ombre, de capteur ou de cadrage peuvent influencer la lecture ;
+- les notebooks ont été commentés pour un public non spécialiste du traitement d'image, notamment pour un usage forestier.
+
 ## Installation
 
 ```bash
